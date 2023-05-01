@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bar Grades</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      
+        body {
+        background: #202124;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+
+      .chartCard {
+        display: flex;
+        align-items: center;
+        justify-content:space-evenly;
+        width: 100vw;
+        margin-bottom: 2rem;
+        height: 50%;
+        
+      }
+      .chartBox {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 3px solid #202124;
+        height: 100%;
+        background: rgb(69, 69, 69);
+      }
+
+      #pie {
+        width: 45%;
+        background: rgb(69, 69, 69);
+        padding: 2rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chartBox, #pie {
+        border-radius: .5rem
+      }
+
+      #container {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+      }
+
+      ::placeholder {
+        color: rgb(59, 59, 59);
+        text-align: center;
+      }
+      input {
+        padding: 2px;
+        width: 7rem;
+        text-align: center;
+        font-weight: bolder;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      }
+      h1 {
+        font-family:'Courier New', Courier, monospace;
+        color: white;
+      }
+     
+      @media screen and (max-width: 870px) {
+        body{
+          height: auto;
+        }
+        .chartCard {
+          flex-direction: column;
+          height: auto;
+          width: 80%;
+
+        }
+        .chartBox, #pie {
+          width: 100%;
+        }
+        .chartBox{
+          height: 12rem;
+        }
+        #pie {
+          height:20rem;
+        }
+        #container {
+          flex-wrap: wrap;
+        }
+      }
+      @media screen and (max-width: 430px) {
+        .chartCard {
+          width: 100%;
+        }
+      }
+      
+      
+      
+      
+    </style>
+  </head>
+  <body>
+
+    <div class="chartCard">
+      
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <div id="pie">
+        <h1>PIE CHART</h1>
+        <canvas id="pie-chart"></canvas>
+      </div>
+
+
+    </div>
+
+    <div id="container">
+      <input id="English" min="0" max="100" type="number" oninput="input(this)" placeholder="English">
+      <input id="Filipino" min="0" max="100" type="number" oninput="input(this)" placeholder="Filipino">
+      <input id="Stat&Prob" min="0" max="100" type="number" oninput="input(this)" placeholder="Stat & Prob">
+      <input id="PE" min="0" max="100" type="number" oninput="input(this)" placeholder="PE">
+      <input id="Research" min="0" max="100" type="number" oninput="input(this)" placeholder="Research">
+      <input id="EMTEC" min="0" max="100" type="number" oninput="input(this)" placeholder="EMTEC">
+      <input id="ProfEnglish" min="0" max="100" type="number" oninput="input(this)" placeholder="Prof English">
+      <input id="Major3" min="0" max="100" type="number" oninput="input(this)" placeholder="Major 3">
+      <input id="Major4" min="0" max="100" type="number" oninput="input(this)" placeholder="Major 4">
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+    <script>
+
+var barColors = [
+'rgba(252, 227, 3, 0.8)',
+          'rgba(12, 128, 1, 0.5)',
+          'rgba(255, 25, 0, 0.5)',
+          'rgba(7, 189, 245, 0.5)',
+          'rgba(153, 102, 255,0.5)',
+          'rgba(90, 245, 7, 0.5)',
+          'rgba(7, 245, 94, 0.5)',
+          'rgba(245, 102, 7, 0.5)',
+          'rgba(255, 148, 33, 0.5)'
+];
+
+    // setup 
+    const data = {
+      labels: ['English 2', 'Filipino 2', 'Stat & Prob', 'PE 2', 'Research 1', 'EMTEC', 'Prof English', 'Major 3', 'Major 4'],
+      datasets: [{
+        label: 'Bar Chart',
+        data: [, , , , , , , , , 100],
+        backgroundColor: barColors,
+        borderColor: [
+          'rgba(0,0,0)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // config 
+    const config = {
+      type: 'bar',
+      data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+    Chart.defaults.color = '#fff';
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+
+    var xValues = ['English 2', 'Filipino 2', 'Stat & Prob', 'PE 2', 'Research 1', 'EMTEC', 'Prof English', 'Major 3', 'Major 4'];
+var yValues;
+
+
+const pieC = new Chart("pie-chart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues,
+    
+    }]
+  },
+});
+
+  
+
+  
+
+        
+
+
+    function input(barvalues) {
+        var English = document.getElementById("English").value;
+        var Filipino = document.getElementById("Filipino").value;
+        var StatProb = document.getElementById("Stat&Prob").value;
+        var PE = document.getElementById("PE").value;
+        var Research = document.getElementById("Research").value;
+        var EMTEC = document.getElementById("EMTEC").value;
+        var ProfEnglish = document.getElementById("ProfEnglish").value;
+        var Major3 = document.getElementById("Major3").value;
+        var Major4 = document.getElementById("Major4").value;
+        
+        console.log(English, Filipino, StatProb, PE, Research, EMTEC, ProfEnglish, Major3, Major4)
+
+        myChart.config.data.datasets[0].data[0] = English
+        myChart.config.data.datasets[0].data[1] = Filipino
+        myChart.config.data.datasets[0].data[2] = StatProb
+        myChart.config.data.datasets[0].data[3] = PE
+        myChart.config.data.datasets[0].data[4] = Research
+        myChart.config.data.datasets[0].data[5] = EMTEC
+        myChart.config.data.datasets[0].data[6] = ProfEnglish
+        myChart.config.data.datasets[0].data[7] = Major3
+        myChart.config.data.datasets[0].data[8] = Major4
+        myChart.update();
+
+        yValues = 
+        pieC.config.data.datasets[0].data[0] = English
+        pieC.config.data.datasets[0].data[1] = Filipino
+        pieC.config.data.datasets[0].data[2] = StatProb
+        pieC.config.data.datasets[0].data[3] = PE
+        pieC.config.data.datasets[0].data[4] = Research
+        pieC.config.data.datasets[0].data[5] = EMTEC
+        pieC.config.data.datasets[0].data[6] = ProfEnglish
+        pieC.config.data.datasets[0].data[7] = Major3
+        pieC.config.data.datasets[0].data[8] = Major4
+        pieC.update();
+        console.log(yValues)
+
+    }
+    
+    </script>
+
+  </body>
+</html>
