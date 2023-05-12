@@ -78,6 +78,13 @@
         font-family:'Courier New', Courier, monospace;
         color: white;
       }
+
+      #nm {
+        color:white;
+        font-size: 1px;
+        opacity: 0.01;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
      
       @media screen and (max-width: 870px) {
         body{
@@ -114,7 +121,7 @@
     </style>
   </head>
   <body>
-
+    <span id="nm"></span>
     <div class="chartCard">
       
       <div class="chartBox">
@@ -142,6 +149,8 @@
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
     <script>
+      var nm = document.getElementById("nm").innerHTML = "Christian Leocario";
+
 
 var barColors = [
 'rgba(252, 227, 3, 0.8)',
